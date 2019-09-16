@@ -16,3 +16,4 @@ Route::group(['prefix' => 'articletype'], function () {
         dd('This is the Articletype module index page. Build something great!');
     });
 });
+Route::resource('admin/article_type','ArticleTypeController');
