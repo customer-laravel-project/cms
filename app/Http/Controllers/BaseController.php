@@ -1,5 +1,10 @@
 <?php
 namespace App\Http\Controllers;
-class BaseController extends Controller{
 
+use Illuminate\Support\Facades\Auth;
+class BaseController extends Controller{
+    public function __construct()
+    {
+        //dd(Auth::guard('auth')->user());
+    }
 }
