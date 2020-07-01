@@ -1,9 +1,0 @@
-
-t	php:S1448"aClass "Alias" has 23 methods, which is greater than 20 authorized. Split it into smaller classes.(ğé¢È
-B	php:S1066"/Merge this if statement with the enclosing one.(—·ï
-l	php:S3776"TRefactor this function to reduce its Cognitive Complexity from 28 to the 15 allowed.(äá­Óÿÿÿÿÿ
-9	php:S1110"!Remove these useless parentheses.(¤ø¼ãùÿÿÿÿ
-]	php:S1117"JRename "$facade" which has the same name as the field declared at line 24.(µ·¯
-]	php:S1117"JRename "$facade" which has the same name as the field declared at line 24.(µ·¯
-[	php:S1117"HRename "$root" which has the same name as the field declared at line 31.(öÍ‡á
-^	php:S1117"KRename "$methods" which has the same name as the field declared at line 33.(Ï¤ï
