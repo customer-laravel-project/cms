@@ -36,14 +36,15 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
         'admin'=>[
             'driver'=>'session',
             'provider'=>'admins',
         ],
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
 
         'api' => [
             'driver' => 'token',
@@ -103,6 +104,11 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'admins' => [
+            'provider' => 'admins',
             'table' => 'password_resets',
             'expire' => 60,
         ],

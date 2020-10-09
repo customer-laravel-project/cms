@@ -1,10 +1,15 @@
 <?php
 
-namespace App\Modules\Admin\Http\Controllers;
+namespace App\Modules\Admin\Http\Controllers\Auth;
 
+use App\Modules\Admin\Models\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -26,7 +31,9 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin';
+    protected $redirectTo = '/admin/home';
+
+
 
     /**
      * Create a new controller instance.
@@ -35,20 +42,17 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth:admin')->except('logout');
+        $this->middleware('guest')->except("admin.logout");
     }
 
-    
+
 
     public function showLoginForm()
     {
         return view('admin::login');
     }
 
-    protected function guard()
-    {
-        return auth()->guard('admin');
-    }
+
 
     /**
      * 后台管理员退出跳转到后台登录页面
@@ -63,11 +67,11 @@ class LoginController extends Controller
 
         $request->session()->invalidate();
 
-        return redirect('/admin/login');
+        return redirect('/auth/login');
     }
     protected function attemptLogin(Request $request)
     {
-        $username = $request->input('username');
+        $username = $request->input($this->username());
         $password = $request->input('password');
 
         // 验证用户名登录方式
@@ -81,6 +85,7 @@ class LoginController extends Controller
         $mobileLogin = $this->guard()->attempt(
             ['email' => $username, 'password' => $password], $request->has('remember')
         );
+
         if ($mobileLogin) {
             return true;
         }
@@ -89,6 +94,7 @@ class LoginController extends Controller
         $emailLogin = $this->guard()->attempt(
             ['email' => $username, 'password' => $password], $request->has('remember')
         );
+
         if ($emailLogin) {
             return true;
         }
@@ -105,6 +111,59 @@ class LoginController extends Controller
 
     public function username()
     {
-        return 'username';
+        return 'email';
+    }
+
+    protected  function guard()
+    {
+        return Auth::guard("admin");
+    }
+
+    public function login(Request $request)
+    {
+        request()->validate([
+            $this->username()=> 'required',
+            'password' => 'required',
+        ]);
+        $credentials = $request->only($this->username(),'password');
+        if ($this->guard()->attempt($credentials)) {
+           // dd($this->guard()->user());
+
+            return $this->sendLoginResponse($request);
+        }
+
+        return back()->withInput()->withErrors([
+            $this->username() => $this->getFailedLoginMessage(),
+        ]);
+    }
+
+    /**
+     * @return string|\Symfony\Component\Translation\TranslatorInterface
+     */
+    protected function getFailedLoginMessage()
+    {
+        return Lang::has('auth.failed')
+            ? trans('auth.failed')
+            : 'These credentials do not match our records.';
+    }
+    /**
+     * Send the response after the user was authenticated.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    protected function sendLoginResponse(Request $request)
+    {
+
+        $request->session()->regenerate();
+        //dd($this->redirectPath());
+        return redirect()->intended($this->redirectPath());
+    }
+
+    public function authenticated(Request $request, $user)
+    {
+
+        return true;
     }
 }

@@ -21,10 +21,10 @@
 
     <script src="/vendor/animsition/animsition.min.js"></script>
 
-    
+
 
     <!-- Title Page-->
-    <title>CMS - @yield('title')</title>
+    <title>CMS - {{$title??'admin'}}</title>
 
 
 </head>
@@ -83,7 +83,7 @@
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p30">
-                    <div class="container-fluid">   
+                    <div class="container-fluid">
                        @yield('content')
                        @include('partials/footer')
                     </div>

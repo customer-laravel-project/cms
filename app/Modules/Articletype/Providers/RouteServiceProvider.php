@@ -52,7 +52,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes()
     {
         Route::group([
-            'middleware' => 'web',
+            'middleware' => 'auth.admin',
             'namespace'  => $this->namespace,
         ], function ($router) {
             require module_path('articletype', 'Routes/web.php', 'app');

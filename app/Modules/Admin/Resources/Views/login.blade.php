@@ -36,9 +36,9 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Email</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control au-input au-input--full @error('username') is-invalid @enderror" type="email" name="username"
-                                            placeholder="Email"  id="username" value="{{ old('username') }}">
-                                            @error('username')
+                                        <input class="form-control au-input au-input--full @error('email') is-invalid @enderror" type="email" name="email"
+                                            placeholder="Email"  id="email" value="{{ old('email') }}">
+                                            @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -71,7 +71,7 @@
                             <div class="register-link">
                                 <p>
                                     Don't you have account?
-                                    <a href="#">Sign Up Here</a>
+                                    <a href="{{ route('admin.register') }}">Sign Up Here</a>
                                 </p>
                             </div>
                         </div>
