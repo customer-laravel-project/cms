@@ -70,4 +70,19 @@ class RouteServiceProvider extends ServiceProvider
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
     }
+
+    /**
+     * Define the "api" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapAdminRoutes()
+    {
+        Route::prefix('auth')
+            ->middleware('auth.admin')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api.php'));
+    }
 }

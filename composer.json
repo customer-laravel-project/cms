@@ -9,7 +9,9 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "barryvdh/laravel-ide-helper": "^2.6",
         "caffeinated/modules": "^6.0",
+        "elhebert/laravel-sri": "^2.0",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",

@@ -11,9 +11,7 @@
 |
 */
 
-Route::group(['prefix' => 'articletype'], function () {
-    Route::get('/', function () {
-        dd('This is the Articletype module index page. Build something great!');
-    });
+Route::group(['prefix' => 'admin','middleware'=>'auth:admin'], function () {
+    Route::get('/article_type', 'ArticleTypeController@index');
 });
-Route::resource('admin/article_type','ArticleTypeController');
+//Route::resource('admin/article_type','ArticleTypeController')->middleware('auth:admin');
