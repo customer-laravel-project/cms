@@ -29,9 +29,13 @@ class BaseController extends Controller
     protected function common()
     {
         View()->composer('layouts/app_back', function ($view) {
-           // $view->with(['title' => $this->title]);
-            //$view->with(['description' => $this->description]);
+            $view->with(['title' => $this->title]);
+            $view->with(['description' => $this->description]);
         });
+    }
+
+    protected function menu(){
+
     }
 
 }

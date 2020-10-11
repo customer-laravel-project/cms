@@ -24,12 +24,13 @@
 
 
     <!-- Title Page-->
-    <title>CMS - {{$title??'admin'}}</title>
+    <title>CMS - @yield('title')</title>
 
 
 </head>
 
 <body class="animsition">
+
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
@@ -84,6 +85,12 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
+                        @if ( session()->has('message') )
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">{{ session()->get('message') }}<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button></div>
+
+                        @endif
                        @yield('content')
                        @include('partials/footer')
                     </div>
