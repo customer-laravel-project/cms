@@ -34,7 +34,6 @@ class LoginController extends Controller
     protected $redirectTo = '/admin/home';
 
 
-
     /**
      * Create a new controller instance.
      *
@@ -46,19 +45,17 @@ class LoginController extends Controller
     }
 
 
-
     public function showLoginForm()
     {
         return view('admin::login');
     }
 
 
-
     /**
      * 后台管理员退出跳转到后台登录页面
      * Log the user out of the application.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function logout(Request $request)
@@ -69,6 +66,7 @@ class LoginController extends Controller
 
         return redirect('/auth/login');
     }
+
     protected function attemptLogin(Request $request)
     {
         $username = $request->input($this->username());
@@ -114,7 +112,7 @@ class LoginController extends Controller
         return 'email';
     }
 
-    protected  function guard()
+    protected function guard()
     {
         return Auth::guard("admin");
     }
@@ -122,13 +120,11 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         request()->validate([
-            $this->username()=> 'required',
+            $this->username() => 'required',
             'password' => 'required',
         ]);
-        $credentials = $request->only($this->username(),'password');
+        $credentials = $request->only($this->username(), 'password');
         if ($this->guard()->attempt($credentials)) {
-           // dd($this->guard()->user());
-
             return $this->sendLoginResponse($request);
         }
 
@@ -146,6 +142,7 @@ class LoginController extends Controller
             ? trans('auth.failed')
             : 'These credentials do not match our records.';
     }
+
     /**
      * Send the response after the user was authenticated.
      *
@@ -156,7 +153,7 @@ class LoginController extends Controller
     protected function sendLoginResponse(Request $request)
     {
 
-        $request->session()->regenerate();
+        //$request->session()->regenerate();
         //dd($this->redirectPath());
         return redirect()->intended($this->redirectPath());
     }

@@ -12,6 +12,8 @@ namespace App\Modules\Admin\Http\Controllers;
 
 use App\Http\Controllers\BaseController;
 use App\Modules\Admin\Models\Menu;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class MenuController extends BaseController
 {
@@ -20,24 +22,36 @@ class MenuController extends BaseController
     {
         $this->title = 'MenuManagement';
         parent::__construct();
+        $this->setAdmin();
     }
-    public function index(){
-        return view('admin::menu/index',['menu'=>Menu::all()]);
+
+    public function index()
+    {
+        $this->setAdmin();
+        return view('admin::menu/index', ['menu' => Menu::all()]);
     }
-    public function add(){
+
+    public function add()
+    {
         return view('admin::menu/add');
     }
-    public function store(){
+
+    public function store()
+    {
         Menu::create(request()->all());
         return "success";
     }
-    public function edit(int $id){
+
+    public function edit(int $id)
+    {
         $menu = Menu::find($id);
-        return view('admin::menu/edit',['menu'=>$menu,'id'=>$id]);
+        return view('admin::menu/edit', ['menu' => $menu, 'id' => $id]);
     }
-    public function update(int $id){
+
+    public function update(int $id)
+    {
         $menu = new Menu();
-        $menu->where('id',$id)->update(request()->except(['_token']));
-       return redirect()->route('admin.menu')->with('message', '更新成功');
+        $menu->where('id', $id)->update(request()->except(['_token']));
+        return redirect()->route('admin.menu')->with('message', '更新成功');
     }
 }

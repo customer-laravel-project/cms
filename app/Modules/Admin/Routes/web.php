@@ -12,16 +12,16 @@
 */
 //\Illuminate\Support\Facades\Auth::routes();
 
-Route::group(['prefix'=>'auth','namespace'=>'Auth'],function () {
+Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 
     $this->get('login', 'LoginController@showLoginForm')->name('admin.login');
     $this->post('login', 'LoginController@login');
     $this->get('register', 'RegisterController@showRegistrationForm')->name('admin.register');
     $this->post('register', 'RegisterController@register');
-    $this->post('logout', 'LoginController@logout')->name('admin.logout');
+    $this->get('logout', 'LoginController@logout')->name('admin.logout');
 });
 
-Route::group(['prefix'=>'admin'],function () {
+Route::group(['prefix' => 'admin'], function () {
 
     $this->get('home', 'DashboardController@index')->name('admin.home');
     $this->get('menu', 'MenuController@index')->name('admin.menu');
