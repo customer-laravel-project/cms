@@ -21,7 +21,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     $this->get('logout', 'LoginController@logout')->name('admin.logout');
 });
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', "middleware" => 'auth.admin'], function () {
 
     $this->get('home', 'DashboardController@index')->name('admin.home');
     $this->get('menu', 'MenuController@index')->name('admin.menu');

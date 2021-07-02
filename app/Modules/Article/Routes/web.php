@@ -11,8 +11,6 @@
 |
 */
 
-Route::group(['prefix' => 'article'], function () {
-    Route::get('/', function () {
-        dd('This is the Article module index page. Build something great!');
-    });
+Route::group(['prefix' => 'admin'], function () {
+    $this->get('article', 'ArticleController@index');
 });

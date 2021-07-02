@@ -1,6 +1,6 @@
 @extends('layouts.app_back')
 
-@section('title', 'MenuManagement')
+@section('title', 'MenuManagement33')
 
 
 @section('content')

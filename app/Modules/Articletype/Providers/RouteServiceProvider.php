@@ -52,8 +52,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes()
     {
         Route::group([
-            'middleware' => 'auth.admin',
-            'namespace'  => $this->namespace,
+            'middleware' => 'web',
+            'namespace' => $this->namespace,
         ], function ($router) {
             require module_path('articletype', 'Routes/web.php', 'app');
         });
@@ -70,8 +70,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::group([
             'middleware' => 'auth:api',
-            'namespace'  => $this->namespace,
-            'prefix'     => 'api',
+            'namespace' => $this->namespace,
+            'prefix' => 'api',
         ], function ($router) {
             require module_path('articletype', 'Routes/api.php', 'app');
         });

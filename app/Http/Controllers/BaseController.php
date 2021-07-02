@@ -15,7 +15,8 @@ class BaseController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth.admin');
+        //dd(Auth::guard("admin"));
+        //$this->middleware('auth.admin');
         $this->header();
         $this->common();
     }

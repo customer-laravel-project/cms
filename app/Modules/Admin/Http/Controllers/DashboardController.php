@@ -21,6 +21,7 @@ class DashboardController extends BaseController
      */
     public function __construct()
     {
+        $this->title = "Dashboard";
         parent::__construct();
     }
 
@@ -32,6 +33,7 @@ class DashboardController extends BaseController
     public function index()
     {
         $this->setAdmin();
+
         return view('admin::home');
     }
 

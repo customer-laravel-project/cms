@@ -39,7 +39,8 @@ class MenuController extends BaseController
     public function store()
     {
         Menu::create(request()->all());
-        return "success";
+        //session("message", "create menu success");
+        return redirect()->intended(route("admin.menu", [], false))->with("message", "create menu success");
     }
 
     public function edit(int $id)
