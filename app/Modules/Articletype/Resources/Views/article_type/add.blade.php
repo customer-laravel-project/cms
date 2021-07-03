@@ -42,7 +42,7 @@
                 <label for="sorts" class=" form-control-label">序号</label>
             </div>
             <div class="col-12 col-md-9">
-                <input type="number" id="sorts" name="sort" placeholder="输入序号"
+                <input type="number" id="sorts" name="sorts" placeholder="输入序号"
                        class="form-control @error('sorts') is-invalid @enderror" value="0">
                 <span class="help-block">Please enter article type  sort</span>
                 @error('sorts')

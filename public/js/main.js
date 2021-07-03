@@ -1270,6 +1270,7 @@
         overlayClass: 'animsition-overlay-slide',
         overlayParentElement: 'html',
         transition: function (url) {
+            console.log(url)
             window.location.href = url;
         }
     });

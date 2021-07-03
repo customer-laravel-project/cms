@@ -2,6 +2,7 @@
 
 namespace App\Modules\Articletype\Http\Controllers;
 
+use App\Modules\Admin\Models\Admin;
 use App\Modules\Articletype\Request\ArticleTypeRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -24,7 +25,16 @@ class ArticleTypeController extends BaseController
     public function index()
     {
         $this->setAdmin();
-        return view('articletype::article_type/index', ['menu' => ArticleType::all()]);
+        $list = ArticleType::query()->orderBy("id", "desc")->paginate(1);
+        $creatorId = $list->pluck("creator")->toArray();
+        $lastOperatorId = $list->pluck("last_operator")->toArray();
+        $adminId = array_unique(array_merge($creatorId, $lastOperatorId));
+        $admin = Admin::query()->whereIn('id', $adminId)->get()->pluck("name", 'id');
+        foreach ($list as $value) {
+            $value['operator_name'] = $admin[$value['creator']] ?? '';
+            $value['last_operator_name'] = $admin[$value['last_operator']] ?? '';
+        }
+        return view('articletype::article_type/index', ['type' => $list]);
     }
 
     public function add()
