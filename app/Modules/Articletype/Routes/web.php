@@ -14,5 +14,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function () {
     $this->get('article_type', 'ArticleTypeController@index')->name('article_type.index');
     $this->get('article_type/add', 'ArticleTypeController@add');
     $this->post('article_type/create', 'ArticleTypeController@create')->name("article.create");
+    $this->get('article_type/edit/{id}', 'ArticleTypeController@edit');
+    $this->post('article_type/update/{id}', 'ArticleTypeController@update')->name("article.update");
 });
 

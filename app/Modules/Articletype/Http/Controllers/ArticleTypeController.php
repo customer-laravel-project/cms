@@ -5,12 +5,9 @@ namespace App\Modules\Articletype\Http\Controllers;
 use App\Modules\Admin\Models\Admin;
 use App\Modules\Articletype\Request\ArticleTypeRequest;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use App\Modules\ArticleType\Models\ArticleType;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Validation\ValidationException;
 
 class ArticleTypeController extends BaseController
 {
@@ -58,7 +55,17 @@ class ArticleTypeController extends BaseController
 
     public function edit(int $id)
     {
-        # code...
+        $type = ArticleType::query()->findOrFail($id);
+        return view("articletype::article_type/edit", ['type' => $type]);
+    }
+
+    public function update(int $id, ArticleTypeRequest $request)
+    {
+        $data = $request->only(['name', 'sorts', 'abbr']);
+        $data['last_operator'] = Auth::guard('admin')->user()->id;
+        ArticleType::query()->where('id', $data)->update($data);
+        return redirect()->intended(route("article_type.index", [], false))->with(['message' => '类型修改成功']);
+
     }
 
     public function show(int $id)
