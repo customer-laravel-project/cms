@@ -1665,3 +1665,47 @@
     }
 
 })(jQuery);
+<!-- end modal small -->
+
+(function ($) {
+    // USE STRICT
+    "use strict";
+    $('.deltype').click(function (e) {
+        e.preventDefault();
+        var obj = $(this);
+        var url = obj.data('url');
+        var title = obj.data('title');
+        $('#delmodal').on('show.bs.modal', function (event) {
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('.modal-title').text(title);
+            modal.find('.modal-footer .btn-primary').attr('data-url', url);
+        })
+        $('#delmodal').modal('toggle');
+        $('.btn-del-type').click(function () {
+            var o = $(this);
+            $.ajax({
+                url: o.data('url'),
+                type: 'post',
+                dataType: 'json',
+                //data: JSON.stringify({data:{status: "start"}}),
+                data: {name: "xu", foo: 'bar'},
+                cache: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (res) {
+                    console.log(res);
+                },
+                error: function (e) {
+
+                }
+            });
+
+            $('#delmodal').modal('hide');
+        })
+    })
+
+})
+(jQuery);

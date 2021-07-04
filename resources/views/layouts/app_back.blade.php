@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="/css/theme.css">
     <link href="/vendor/wow/animate.css" rel="stylesheet" media="all">
     <link href="/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <script src="/js/app.js"></script>
+
     <link href="/js/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
     <link href="/js/bootstrap/bootstrap.min.css" rel="stylesheet" media="all">
 
@@ -99,14 +101,15 @@
         </div>
         <!-- END MAIN CONTENT-->
         <!-- END PAGE CONTAINER-->
+        @include('partials/modal')
+
     </div>
 
 </div>
 <!-- Jquery JS-->
-<script src="/vendor/jquery-3.2.1.min.js"></script>
 <!-- Bootstrap JS-->
-<script src="/vendor/bootstrap-4.1/popper.min.js"></script>
-<script src="/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+<!--<script src="/vendor/bootstrap-4.1/popper.min.js"></script>-->
+<!--<script src="/vendor/bootstrap-4.1/bootstrap.min.js"></script>-->
 
 
 <!-- Vendor JS       -->

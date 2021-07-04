@@ -17,6 +17,8 @@
                     <th>序号</th>
                     <th>创建人</th>
                     <th>最后修改人</th>
+                    <th>状态</th>
+                    <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -27,6 +29,18 @@
                     <td>{{$item['sorts']}}</td>
                     <td>{{$item['operator_name']}}</td>
                     <td>{{$item['last_operator_name']}}</td>
+                    <td>
+                        @if($item['status']==1)正常@endif
+                        @if($item['status']==2)已删除@endif
+                    </td>
+                    <td>
+                        <a href="{{route('article_type.edit',['id'=>$item['id']])}}">编辑</a>
+                        @if($item['status']==1)|<a class="button deltype" href="#"
+                                                   data-url="{{route('article_type.del',['id'=>$item['id']])}}"
+                                                   data-title="删除分类">删除</a>@endif
+                        @if($item['status']==2)|<a class="button" href="#" data-toggle="modal"
+                                                   data-target="#recovermodal" data-id="{{$item['id']}}">恢复</a>@endif
+                    </td>
                 </tr>
                 @endforeach
 
@@ -39,3 +53,7 @@
     </div>
 </div>
 @endsection
+
+
+
+

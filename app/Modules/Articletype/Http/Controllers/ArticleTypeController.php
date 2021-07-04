@@ -4,6 +4,7 @@ namespace App\Modules\Articletype\Http\Controllers;
 
 use App\Modules\Admin\Models\Admin;
 use App\Modules\Articletype\Request\ArticleTypeRequest;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\BaseController;
 use App\Modules\ArticleType\Models\ArticleType;
@@ -63,8 +64,22 @@ class ArticleTypeController extends BaseController
     {
         $data = $request->only(['name', 'sorts', 'abbr']);
         $data['last_operator'] = Auth::guard('admin')->user()->id;
-        ArticleType::query()->where('id', $data)->update($data);
+        ArticleType::query()->where('id', $id)->update($data);
         return redirect()->intended(route("article_type.index", [], false))->with(['message' => '类型修改成功']);
+    }
+
+    public function del(int $id)
+    {
+        ArticleType::query()->where('id', $id)->update(['status' => 2]);
+        return response()->json(['code' => 0, 'message' => 'success']);
+        return redirect()->intended(route("article_type.index", [], false))->with(['message' => '类型删除成功']);
+
+    }
+
+    public function recover(int $id)
+    {
+        ArticleType::query()->where('id', $id)->update(['status' => 1]);
+        return redirect()->intended(route("article_type.index", [], false))->with(['message' => '类型恢复成功']);
 
     }
 

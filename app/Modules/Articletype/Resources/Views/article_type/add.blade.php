@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="rows">
-    <form action="{{route('article.create')}}" method="post" class="form-horizontal">
+    <form action="{{route('article_type.create')}}" method="post" class="form-horizontal">
         @csrf
         <div class="row form-group">
             <div class="col col-md-3">
