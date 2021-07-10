@@ -36,10 +36,17 @@
                     <td>
                         <a href="{{route('article_type.edit',['id'=>$item['id']])}}">编辑</a>
                         @if($item['status']==1)|<a class="button deltype" href="#"
-                                                   data-url="{{route('article_type.del',['id'=>$item['id']])}}"
-                                                   data-title="删除分类">删除</a>@endif
-                        @if($item['status']==2)|<a class="button" href="#" data-toggle="modal"
-                                                   data-target="#recovermodal" data-id="{{$item['id']}}">恢复</a>@endif
+                                                   data-del="{{route('article_type.del',['id'=>$item['id']])}}"
+                                                   data-title="删除分类"
+                                                   data-recover="{{route('article_type.recover',['id'=>$item['id']])}}"
+                                                   data-toggle="modal" data-target="#delmodal"
+                                                   id="a_id_{{$item['id']}}">删除</a>@endif
+                        @if($item['status']==2)|<a class="button recovertype" href="#"
+                                                   data-recover="{{route('article_type.recover',['id'=>$item['id']])}}"
+                                                   data-title="恢复分类"
+                                                   data-del="{{route('article_type.del',['id'=>$item['id']])}}"
+                                                   data-toggle="modal" data-target="#recovermodal"
+                                                   id="a_id_{{$item['id']}}">恢复</a>@endif
                     </td>
                 </tr>
                 @endforeach

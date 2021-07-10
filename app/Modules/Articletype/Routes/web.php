@@ -17,6 +17,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function () {
     $this->get('article_type/edit/{id}', 'ArticleTypeController@edit')->name("article_type.edit");
     $this->post('article_type/update/{id}', 'ArticleTypeController@update')->name("article_type.update");
     $this->post('article_type/del/{id}', 'ArticleTypeController@del')->name("article_type.del");
-    $this->get('article_type/recover/{id}', 'ArticleTypeController@recover')->name("article_type.recover");
+    $this->post('article_type/recover/{id}', 'ArticleTypeController@recover')->name("article_type.recover");
 });
 

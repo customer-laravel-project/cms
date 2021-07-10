@@ -79,6 +79,8 @@ class ArticleTypeController extends BaseController
     public function recover(int $id)
     {
         ArticleType::query()->where('id', $id)->update(['status' => 1]);
+        return response()->json(['code' => 0, 'message' => 'success']);
+
         return redirect()->intended(route("article_type.index", [], false))->with(['message' => '类型恢复成功']);
 
     }

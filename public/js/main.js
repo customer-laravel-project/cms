@@ -1670,41 +1670,77 @@
 (function ($) {
     // USE STRICT
     "use strict";
-    $('.deltype').click(function (e) {
-        e.preventDefault();
-        var obj = $(this);
-        var url = obj.data('url');
-        var title = obj.data('title');
-        $('#delmodal').on('show.bs.modal', function (event) {
-            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-            var modal = $(this)
-            modal.find('.modal-title').text(title);
-            modal.find('.modal-footer .btn-primary').attr('data-url', url);
-        })
-        $('#delmodal').modal('toggle');
-        $('.btn-del-type').click(function () {
-            var o = $(this);
-            $.ajax({
-                url: o.data('url'),
-                type: 'post',
-                dataType: 'json',
-                //data: JSON.stringify({data:{status: "start"}}),
-                data: {name: "xu", foo: 'bar'},
-                cache: false,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function (res) {
-                    console.log(res);
-                },
-                error: function (e) {
+    $('.btn-del-type').on('click', function (event) {
+        console.log($(event.relatedTarget))
+        let o = $(this);
+        $.ajax({
+            url: o.data('del'),
+            type: 'post',
+            dataType: 'json',
+            cache: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (res) {
+                let oo = $('#' + o.data("id"));
+                oo.attr("data-target", '#recovermodal')
+                oo.text("恢复");
+                oo.parent('td').prev().text('已删除');
+            },
+            error: function (e) {
 
-                }
-            });
+            }
+        });
 
-            $('#delmodal').modal('hide');
-        })
+        $('#delmodal').modal('hide');
+    })
+    $('#delmodal').on('show.bs.modal', function (event) {
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var ele = $(event.relatedTarget)
+        var modal = $(this)
+        modal.find('.modal-footer .btn-primary').attr('data-del', ele.data('del'));
+        modal.find('.modal-footer .btn-primary').attr('data-recover', ele.data('recover'));
+        modal.find('.modal-footer .btn-primary').attr('data-id', ele.attr('id'));
+    })
+
+
+})
+(jQuery);
+
+(function ($) {
+    // USE STRICT
+    "use strict";
+    $('#recovermodal').on('show.bs.modal', function (event) {
+        var ele = $(event.relatedTarget)
+        var modal = $(this)
+        modal.find('.modal-footer .btn-primary').attr('data-del', ele.data('del'));
+        modal.find('.modal-footer .btn-primary').attr('data-recover', ele.data('recover'));
+        modal.find('.modal-footer .btn-primary').attr('data-id', ele.attr('id'));
+    })
+    $('.btn-recover-type').click(function () {
+        var o = $(this);
+        $.ajax({
+            url: o.data('recover'),
+            type: 'post',
+            dataType: 'json',
+            //data: JSON.stringify({data:{status: "start"}}),
+            cache: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (res) {
+                let oo = $('#' + o.data("id"));
+                oo.attr("data-target", '#delmodal')
+                oo.text("删除");
+                oo.parent('td').prev().text('正常');
+            },
+            error: function (e) {
+
+            }
+        });
+
+        $('#recovermodal').modal('hide');
     })
 
 })
