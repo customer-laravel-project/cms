@@ -3,7 +3,7 @@
 namespace App\Modules\Articletype\Http\Controllers;
 
 use App\Modules\Admin\Models\Admin;
-use App\Modules\Articletype\Request\ArticleTypeRequest;
+use App\Modules\Articletype\Request\ArticleRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\BaseController;
@@ -41,10 +41,10 @@ class ArticleTypeController extends BaseController
     }
 
     /**
-     * @param ArticleTypeRequest $request
+     * @param ArticleRequest $request
      * @return RedirectResponse
      */
-    public function create(ArticleTypeRequest $request)
+    public function create(ArticleRequest $request)
     {
         $admin = Auth::guard('admin')->user();
         $data = $request->only(['name', 'abbr', 'sorts']);
@@ -60,7 +60,7 @@ class ArticleTypeController extends BaseController
         return view("articletype::article_type/edit", ['type' => $type]);
     }
 
-    public function update(int $id, ArticleTypeRequest $request)
+    public function update(int $id, ArticleRequest $request)
     {
         $data = $request->only(['name', 'sorts', 'abbr']);
         $data['last_operator'] = Auth::guard('admin')->user()->id;

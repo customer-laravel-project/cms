@@ -40,6 +40,8 @@
                     <td>{{$item['created_at']}}</td>
                     <td>
                         <a href="{{route('article_type.edit',['id'=>$item['id']])}}">编辑</a>
+                        |<a href="#" data-toggle="modal" data-target="#contentmodal"
+                            data-content="{{$item['content']}}">查看文章内容</a>
                         @if($item['status']==1)|<a class="button deltype" href="#"
                                                    data-del="{{route('article_type.del',['id'=>$item['id']])}}"
                                                    data-title="删除分类"

@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function () {
     $this->get('article', 'ArticleController@index')->name('article.index');
     $this->get('article/add', 'ArticleController@add')->name('article.add');
     $this->post('article/create', 'ArticleController@create')->name("article.create");
@@ -19,5 +19,7 @@ Route::group(['prefix' => 'admin'], function () {
     $this->post('article/update/{id}', 'ArticleController@update')->name("article.update");
     $this->post('article/del/{id}', 'ArticleController@del')->name("article.del");
     $this->post('article/recover/{id}', 'ArticleController@recover')->name("article.recover");
+    $this->post('article/upload', 'ArticleController@upload');
+    $this->post('article/deleteImg', 'ArticleController@deleteImg');
 
 });

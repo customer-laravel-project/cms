@@ -1745,3 +1745,10 @@
 
 })
 (jQuery);
+(function ($) {
+    $('#contentmodal').on('show.bs.modal', function (event) {
+        var ele = $(event.relatedTarget)
+        var modal = $(this)
+        modal.find('.modal-body ').html(ele.data('content'));
+    })
+})(jQuery)

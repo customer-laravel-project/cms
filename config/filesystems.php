@@ -50,11 +50,16 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'root' => public_path(''),
+            'url' => env('APP_URL'),
             'visibility' => 'public',
         ],
-
+        'editor_image' => [
+            'driver' => 'local',
+            'root' => public_path('editor_image'),
+            'url' => env('APP_URL') . '/editor_image',
+            'visibility' => 'public',
+        ],
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
