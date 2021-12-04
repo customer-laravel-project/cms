@@ -6,6 +6,6 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-.js-sub-list>a .active {
-    background: blue;
+.js-sub-list li a.active {
+    background: #dcdcdc;
 }

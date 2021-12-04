@@ -127,6 +127,7 @@
         url=protocol+"//"+host+path
         if(obj.href==url){
             console.log(index,obj.href,url)
+            $(obj).addClass("active")
             openArrow(obj)
         }
 
