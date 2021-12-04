@@ -13,6 +13,7 @@ namespace App\Modules\Admin\Http\Controllers;
 use App\Http\Controllers\BaseController;
 use App\Modules\Admin\Models\Menu;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MenuController extends BaseController
@@ -22,6 +23,7 @@ class MenuController extends BaseController
     {
         $this->title = 'MenuManagement';
         parent::__construct();
+        $this->menu=app('request')->server('REQUEST_URI');
         $this->setAdmin();
     }
 
@@ -31,8 +33,10 @@ class MenuController extends BaseController
         return view('admin::menu/index', ['menu' => Menu::all()]);
     }
 
-    public function add()
+    public function add(Request $request)
     {
+        $this->setAdmin();
+        //dd($request->server('REQUEST_URI'));
         return view('admin::menu/add');
     }
 

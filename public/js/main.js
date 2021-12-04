@@ -1590,7 +1590,10 @@
     } catch (error) {
         console.log(error);
     }
-
+    window.openArrow = function (obj) {
+        console.log("openArrow", $(obj),$(obj).parents('.js-sub-list').prev('a'))
+        $(obj).parents('.js-sub-list').prev('a').trigger('click');
+    };
 
     try {
         // Hamburger Menu

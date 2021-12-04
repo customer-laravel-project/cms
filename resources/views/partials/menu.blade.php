@@ -1,5 +1,12 @@
 @if (!isset($item['children']))
 <li>
+    @php
+        $flag="false";
+        $uri = app('request')->server('REQUEST_URI');
+        if($uri == $item['uri']){
+            $flag="true";
+        }
+    @endphp
     <a href="{{$item['uri']}}">
         {{$item['name']}}</a>
 
@@ -15,4 +22,5 @@
     </ul>
 </li>
 @endif
+
 

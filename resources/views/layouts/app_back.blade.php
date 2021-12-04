@@ -118,7 +118,21 @@
 <script src="/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
 
 <script src="/js/main.js"></script>
+<script>
+    href = $('.js-sub-list>li>a')
+    href.each(function (index,obj){
+        host=window.location.hostname
+        path=window.location.pathname
+        protocol = window.location.protocol
+        url=protocol+"//"+host+path
+        if(obj.href==url){
+            console.log(index,obj.href,url)
+            openArrow(obj)
+        }
 
+    })
+    console.log(href)
+</script>
 </body>
 
 </html>

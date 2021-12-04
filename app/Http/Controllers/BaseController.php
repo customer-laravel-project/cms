@@ -12,6 +12,7 @@ class BaseController extends Controller
     protected $admin;
     protected $title;
     protected $description;
+    protected $menu;
 
     public function __construct()
     {
