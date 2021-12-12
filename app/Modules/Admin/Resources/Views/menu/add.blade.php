@@ -46,6 +46,18 @@
             </div>
         </div>
         <div class="form-group row">
+            <label class="col-sm-2 col-form-label">order</label>
+            <div class="col-sm-10">
+                <input class="form-control au-input au-input--full @error('order') is-invalid @enderror" type="number" name="order"
+                       placeholder="order"  id="order" value="{{ old('order') }}">
+                @error('name')
+                <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                @enderror
+            </div>
+        </div>
+        <div class="form-group row">
             <label class="col-sm-2 col-form-label">uri</label>
             <div class="col-sm-10">
                 <input class="form-control au-input au-input--full @error('uri') is-invalid @enderror" type="text" name="uri"

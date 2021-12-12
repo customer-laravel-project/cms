@@ -20,7 +20,7 @@ class Tree
 
     public static function getTree()
     {
-        $menu = Menu::query()->get()->toArray();
+        $menu = Menu::query()->where('is_show',1)->orderBy("order")->get()->toArray();
         return self::generator($menu, 0);
         return $menu;
     }

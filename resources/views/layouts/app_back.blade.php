@@ -132,6 +132,20 @@
         }
 
     })
+
+    href = $('.navbar__list>li>a')
+    href.each(function (index,obj){
+        host=window.location.hostname
+        path=window.location.pathname
+        protocol = window.location.protocol
+        url=protocol+"//"+host+path
+        if(obj.href==url){
+            console.log(index,obj.href,url)
+            $(obj).addClass("active")
+            openArrow(obj)
+        }
+
+    })
     console.log(href)
 </script>
 </body>

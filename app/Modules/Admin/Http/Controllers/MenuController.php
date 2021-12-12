@@ -24,7 +24,7 @@ class MenuController extends BaseController
         $this->title = 'MenuManagement';
         parent::__construct();
         $this->menu=app('request')->server('REQUEST_URI');
-        $this->setAdmin();
+        //$this->setAdmin();
     }
 
     public function index()
@@ -33,11 +33,16 @@ class MenuController extends BaseController
         return view('admin::menu/index', ['menu' => Menu::all()]);
     }
 
+    function test(){
+        $this->setAdmin();
+        return view('admin::menu/test');
+    }
     public function add(Request $request)
     {
         $this->setAdmin();
+        $parent=Menu::query()->where('parent_id',0)->get();
         //dd($request->server('REQUEST_URI'));
-        return view('admin::menu/add');
+        return view('admin::menu/add',['parent_id'=>$parent]);
     }
 
     public function store()
@@ -49,6 +54,7 @@ class MenuController extends BaseController
 
     public function edit(int $id)
     {
+        $this->setAdmin();
         $menu = Menu::find($id);
         return view('admin::menu/edit', ['menu' => $menu, 'id' => $id]);
     }

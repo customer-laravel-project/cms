@@ -1,5 +1,5 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('/css/font.css');
 
 // Variables
 @import 'variables';
@@ -7,5 +7,9 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 .js-sub-list li a.active {
+    background: #dcdcdc;
+}
+
+.navbar__list li a.active {
     background: #dcdcdc;
 }

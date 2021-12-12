@@ -12,6 +12,7 @@ namespace App\Modules\Admin\Http\Controllers;
 
 use App\Http\Controllers\BaseController;
 use App\Modules\Admin\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 class RoleController extends BaseController
 {
@@ -20,14 +21,18 @@ class RoleController extends BaseController
     {
         $this->title = 'RoleManagement';
         parent::__construct();
+
     }
     public function index(){
+        $this->setAdmin();
         $role = Role::select(['name','slug','id'])->with(['menu'=>function($q){
             $q->select('name');
         }])->get()->toArray();
+
         return view('admin::role/index',['role'=>$role]);
     }
     public function add(){
+        $this->setAdmin();
         return view('admin::role/add');
     }
     public function store(){
@@ -35,6 +40,7 @@ class RoleController extends BaseController
         return redirect()->route('admin.role')->with('message', '新增角色成功');
     }
     public function edit(int $id){
+        $this->setAdmin();
         $role = Role::find($id);
         return view('admin::role/edit',['role'=>$role,'id'=>$id]);
     }

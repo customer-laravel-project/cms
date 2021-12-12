@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@import url(/css/font.css);@charset "UTF-8";
 
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
@@ -10645,6 +10645,10 @@ a.text-dark:focus {
 }
 
 .js-sub-list li a.active {
+  background: #dcdcdc;
+}
+
+.navbar__list li a.active {
   background: #dcdcdc;
 }
 
